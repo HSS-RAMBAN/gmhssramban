@@ -1,6 +1,6 @@
 {
   "$schema": "./node_modules/wrangler/config-schema.json",
-  "name": "YOUR-WORKER-NAME",
+  "name": "gmhssramban",
   "compatibility_date": "2026-08-20",
   "main": "./src/worker.ts",
   "assets": {
