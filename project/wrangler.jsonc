@@ -1,0 +1,9 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "YOUR-WORKER-NAME",
+  "compatibility_date": "2026-08-20",
+  "main": "./src/worker.ts",
+  "assets": {
+    "directory": "./dist"
+  }
+}
