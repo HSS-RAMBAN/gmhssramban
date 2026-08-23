@@ -6,11 +6,11 @@ import { useToast } from '@/components/Toast';
 import { Reveal } from '@/components/Reveal';
 import { SectionHeader } from '@/components/SectionHeader';
 import { PublicUsefulLinks } from '@/components/PublicSections';
-
-const HERO_IMAGE = '/images/hero/747790180_1695912488193881_6220268956494401084_n.jpg';
+import { useHeroImage } from '@/lib/useHeroImage';
 
 export function ContactPage() {
   const q = useAsync(getSchoolSettings, []);
+  const { heroImage } = useHeroImage();
   const { notify } = useToast();
   const [sent, setSent] = useState(false);
   const [busy, setBusy] = useState(false);
@@ -39,7 +39,7 @@ export function ContactPage() {
       {/* Hero */}
       <section className="relative min-h-[50vh] overflow-hidden">
         <div className="absolute inset-0">
-          <img src={HERO_IMAGE} alt="" className="h-full w-full object-cover" />
+          <img src={heroImage} alt="" className="h-full w-full object-cover" />
           <div className="absolute inset-0 hero-overlay-soft" />
         </div>
         <div className="relative flex min-h-[50vh] items-end pb-14 pt-[var(--header-height)]">

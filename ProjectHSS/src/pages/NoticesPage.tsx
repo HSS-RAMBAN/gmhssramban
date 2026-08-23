@@ -6,10 +6,10 @@ import { NoticeCard } from '@/components/NoticeCard';
 import { EmptyState, ErrorState, LoadingSkeleton } from '@/components/States';
 import { Reveal } from '@/components/Reveal';
 import { NOTICE_CATEGORIES, type Notice, NavigateFn } from '@/lib/types';
-
-const HERO_IMAGE = '/images/hero/747790180_1695912488193881_6220268956494401084_n.jpg';
+import { useHeroImage } from '@/lib/useHeroImage';
 
 export function NoticesPage({ onNavigate }: { onNavigate: NavigateFn }) {
+  const { heroImage } = useHeroImage();
   const q = useAsync(() => getPublishedNotices(), []);
   const [term, setTerm] = useState('');
   const [cat, setCat] = useState('All');
@@ -25,7 +25,7 @@ export function NoticesPage({ onNavigate }: { onNavigate: NavigateFn }) {
       {/* Hero */}
       <section className="relative min-h-[50vh] overflow-hidden">
         <div className="absolute inset-0">
-          <img src={HERO_IMAGE} alt="" className="h-full w-full object-cover" />
+          <img src={heroImage} alt="" className="h-full w-full object-cover" />
           <div className="absolute inset-0 hero-overlay-soft" />
         </div>
         <div className="relative flex min-h-[50vh] items-end pb-14 pt-[var(--header-height)]">
@@ -52,7 +52,7 @@ export function NoticesPage({ onNavigate }: { onNavigate: NavigateFn }) {
                 <div className="grid gap-0 lg:grid-cols-12">
                   <div className="lg:col-span-4">
                     <div className="relative h-full min-h-[200px] overflow-hidden">
-                      <img src={HERO_IMAGE} alt="" className="h-full w-full object-cover" loading="lazy" />
+                      <img src={heroImage} alt="" className="h-full w-full object-cover" loading="lazy" />
                       <div className="absolute inset-0 bg-gradient-to-br from-brand-900/80 to-brand-700/40" />
                       <div className="absolute bottom-4 left-5 flex items-center gap-2">
                         <Star className="h-5 w-5 fill-saffron-400 text-saffron-400" />

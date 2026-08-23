@@ -8,3 +8,9 @@ createRoot(document.getElementById('root')!).render(
     <App />
   </StrictMode>
 );
+
+const loader = document.getElementById('app-loader');
+if (loader) {
+  loader.classList.add('app-loader--hidden');
+  setTimeout(() => loader.remove(), 500);
+}

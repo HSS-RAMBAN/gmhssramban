@@ -241,16 +241,6 @@ export interface SchoolQuote {
   updated_at: string;
 }
 
-export interface HeroSlide {
-  id: string;
-  image_path: string;
-  caption: string | null;
-  sort_order: number;
-  is_active: boolean;
-  created_at: string;
-  updated_at: string;
-}
-
 export const SOCIAL_PLATFORMS = [
   'Instagram',
   'Facebook',

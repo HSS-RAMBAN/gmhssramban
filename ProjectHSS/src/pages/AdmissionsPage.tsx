@@ -4,10 +4,10 @@ import { getAdmissionsContent } from '@/lib/queries';
 import { Reveal } from '@/components/Reveal';
 import { EmptyState, ErrorState, LoadingSkeleton } from '@/components/States';
 import type { NavigateFn } from '@/lib/types';
-
-const HERO_IMAGE = '/images/hero/747790180_1695912488193881_6220268956494401084_n.jpg';
+import { useHeroImage } from '@/lib/useHeroImage';
 
 export function AdmissionsPage({ onNavigate }: { onNavigate: NavigateFn }) {
+  const { heroImage } = useHeroImage();
   const content = useAsync(getAdmissionsContent, []);
   const c = content.data;
 
@@ -15,7 +15,7 @@ export function AdmissionsPage({ onNavigate }: { onNavigate: NavigateFn }) {
     <div>
       <section className="relative min-h-[45vh] overflow-hidden">
         <div className="absolute inset-0">
-          <img src={HERO_IMAGE} alt="" className="h-full w-full object-cover" />
+          <img src={heroImage} alt="" className="h-full w-full object-cover" />
           <div className="absolute inset-0 hero-overlay-soft" />
         </div>
         <div className="relative flex min-h-[45vh] items-end pb-14 pt-[var(--header-height)]">

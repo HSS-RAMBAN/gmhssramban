@@ -18,7 +18,7 @@ export function SectionHeader({
       <div className={`max-w-2xl ${align === 'center' ? 'mx-auto' : ''}`}>
         {eyebrow && (
           <div className={`mb-3 flex items-center gap-3 ${align === 'center' ? 'justify-center' : ''}`}>
-            <span className="h-px w-8 bg-gradient-to-r from-brand-400 to-brand-300" />
+            <span className="h-px w-8 gradient-accent rounded-full" />
             <p className="section-eyebrow">{eyebrow}</p>
           </div>
         )}

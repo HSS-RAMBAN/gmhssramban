@@ -49,7 +49,7 @@ export function Header({ currentPath, onNavigate }: { currentPath: string; onNav
     <>
       <header className="fixed inset-x-0 top-0 z-50 flex flex-col">
         {/* Tile 1 — thinnest: location + social icons */}
-        <div className={`overflow-hidden bg-brand-950 text-white transition-[height,opacity] duration-300 ease-in-out ${collapsed ? 'h-0 opacity-0' : 'h-6 opacity-100'}`}>
+        <div className={`overflow-hidden gradient-dark-deep text-white transition-[height,opacity] duration-300 ease-in-out ${collapsed ? 'h-0 opacity-0' : 'h-6 opacity-100'}`}>
           <div className="container-page flex h-6 items-center justify-between">
             <span className="text-[11px] font-medium tracking-wide text-brand-300">Ramban, Jammu &amp; Kashmir, India</span>
             <SocialIcons />
@@ -57,7 +57,7 @@ export function Header({ currentPath, onNavigate }: { currentPath: string; onNav
         </div>
 
         {/* Tile 2 — identity + core actions */}
-        <div className="bg-brand-950 text-white">
+        <div className="gradient-dark text-white">
           <div className="container-page flex h-14 items-center justify-between gap-3">
             {/* Left: hamburger + logo + name */}
             <div className="flex items-center gap-2.5">
@@ -95,7 +95,7 @@ export function Header({ currentPath, onNavigate }: { currentPath: string; onNav
           </div>
         </div>
 
-        {/* Tile 3 — thinnest navigation: 4 tabs */}
+        {/* Tile 3 — thinnest navigation: 4 tabs (transparent, adapts to page background) */}
         <div className={`overflow-hidden text-white transition-[height,opacity] duration-300 ease-in-out ${collapsed ? 'h-0 opacity-0' : 'h-10 opacity-100'}`}>
           <nav className="container-page flex h-10 items-center justify-center gap-1" aria-label="Primary">
             {NAV.map((item) => (
@@ -197,7 +197,7 @@ function UtilityDrawer({ open, onClose, onNavigate }: { open: boolean; onClose: 
         role="dialog"
         aria-modal="true"
         aria-label="GMHSS Ramban menu"
-        className={`fixed inset-y-0 left-0 z-50 flex w-[88vw] max-w-sm flex-col bg-brand-950 text-white shadow-lift transition-transform duration-300 ease-out ${open ? 'translate-x-0' : '-translate-x-full'}`}
+        className={`fixed inset-y-0 left-0 z-50 flex w-[88vw] max-w-sm flex-col gradient-dark-deep text-white shadow-lift transition-transform duration-300 ease-out ${open ? 'translate-x-0' : '-translate-x-full'}`}
       >
         {/* Header — ONLY "GMHSS Ramban" */}
         <div className="flex items-center justify-between border-b border-white/10 px-5 py-5">
@@ -245,7 +245,7 @@ function UtilityDrawer({ open, onClose, onNavigate }: { open: boolean; onClose: 
               onClick={() => go('/admin')}
               className="group flex w-full items-center gap-3 rounded-xl bg-white/5 px-3 py-3 text-left ring-1 ring-inset ring-white/10 transition hover:bg-white/10"
             >
-              <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-brand-500 text-white">
+              <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg gradient-accent text-white">
                 <ShieldCheck className="h-4 w-4" />
               </span>
               <span className="text-sm font-semibold tracking-wide text-white">Staff Login</span>
@@ -256,20 +256,16 @@ function UtilityDrawer({ open, onClose, onNavigate }: { open: boolean; onClose: 
 
         {/* Bottom — only developer credit */}
         <div className="border-t border-white/10 px-5 py-3 text-center">
-          <p className="text-[11px] leading-relaxed text-brand-400">
+          <p className="text-[11px] leading-tight text-brand-400">
             Website designed &amp; developed with{' '}
             <span className="text-red-400">&hearts;</span>
             <br />
             by a proud alumnus,{' '}
             <span className="font-semibold text-brand-200">TheRoxYogi</span>
             {' '}(<span className="font-medium text-brand-300">Batch 2023</span>)
+            <br />
+            <a href="mailto:hiamit.in@gmail.com" className="text-brand-400 transition-colors hover:text-brand-200">hiamit.in@gmail.com</a>
           </p>
-          <a
-            href="mailto:hiamit.in@gmail.com"
-            className="text-[11px] text-brand-400 transition-colors hover:text-brand-200"
-          >
-            hiamit.in@gmail.com
-          </a>
         </div>
       </div>
     </div>

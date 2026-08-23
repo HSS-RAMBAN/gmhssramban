@@ -1,15 +1,15 @@
 import { SectionHeader } from '@/components/SectionHeader';
 import { Reveal } from '@/components/Reveal';
 import { PublicBoardResources } from '@/components/PublicSections';
-
-const HERO_IMAGE = '/images/hero/747790180_1695912488193881_6220268956494401084_n.jpg';
+import { useHeroImage } from '@/lib/useHeroImage';
 
 export function BoardResourcesPage() {
+  const { heroImage } = useHeroImage();
   return (
     <div>
       <section className="relative min-h-[40vh] overflow-hidden">
         <div className="absolute inset-0">
-          <img src={HERO_IMAGE} alt="" className="h-full w-full object-cover" />
+          <img src={heroImage} alt="" className="h-full w-full object-cover" />
           <div className="absolute inset-0 hero-overlay-soft" />
         </div>
         <div className="relative flex min-h-[40vh] items-end pb-14 pt-[var(--header-height)]">

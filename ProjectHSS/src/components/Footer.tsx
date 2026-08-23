@@ -29,7 +29,7 @@ export function Footer() {
   }, []);
 
   return (
-    <footer className="relative overflow-hidden bg-brand-950 text-brand-100">
+    <footer className="relative overflow-hidden gradient-dark-deep text-brand-100">
       <div className="absolute inset-0 topo-texture opacity-40" />
 
       <div className="container-page relative py-16 sm:py-20">
@@ -70,7 +70,7 @@ export function Footer() {
       {showBackTop && (
         <button
           onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-          className="fixed bottom-6 right-6 z-40 flex h-11 w-11 items-center justify-center rounded-full bg-brand-700 text-white shadow-lift transition-all duration-300 hover:bg-brand-800 active:scale-95"
+          className="fixed bottom-6 right-6 z-40 flex h-11 w-11 items-center justify-center rounded-full gradient-accent text-white shadow-lift transition-all duration-300 hover:shadow-glow active:scale-95"
           aria-label="Back to top"
         >
           <ArrowUp className="h-5 w-5" />

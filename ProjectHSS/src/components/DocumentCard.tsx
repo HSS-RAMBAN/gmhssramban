@@ -12,7 +12,7 @@ export function DocumentCard({ doc }: { doc: DocumentItem }) {
       rel="noopener noreferrer"
       className="card card-hover flex items-start gap-4 p-5"
     >
-      <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-brand-50 text-brand-700">
+      <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl gradient-brand-soft text-brand-700 ring-1 ring-brand-100">
         <FileText className="h-6 w-6" />
       </span>
       <div className="min-w-0 flex-1">

@@ -5,7 +5,7 @@
 @layer base {
   :root {
     --header-height: 7.5rem;
-  --hero-image: url('/images/hero/747790180_1695912488193881_6220268956494401084_n.jpg');
+    --hero-image: url('/images/hero/747790180_1695912488193881_6220268956494401084_n.jpg');
   }
 
   html {
@@ -59,8 +59,12 @@
   }
 
   .btn-primary {
-    @apply btn bg-brand-700 text-white shadow-soft hover:bg-brand-800 hover:shadow-card active:scale-[0.98];
+    @apply btn text-white shadow-soft hover:shadow-card active:scale-[0.98];
+    background: linear-gradient(135deg, #6d28d9 0%, #5b21b6 100%);
     transition: all 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .btn-primary:hover {
+    background: linear-gradient(135deg, #5b21b6 0%, #4c1d95 100%);
   }
 
   .btn-secondary {
@@ -86,6 +90,15 @@
     transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.35s ease, ring-color 0.35s ease;
   }
 
+  .card-gradient {
+    @apply rounded-2xl shadow-soft ring-1 ring-brand-100;
+    background: linear-gradient(135deg, #ffffff 0%, #f5f3ff 100%);
+    transition: all 0.3s ease;
+  }
+  .card-gradient:hover {
+    @apply shadow-card ring-brand-200;
+  }
+
   .input {
     @apply w-full rounded-xl border-0 bg-white px-4 py-3 text-sm text-ink-900 ring-1 ring-inset ring-ink-200 transition placeholder:text-ink-400 focus:ring-2 focus:ring-brand-500;
   }
@@ -99,8 +112,12 @@
   }
 
   .section-eyebrow {
-    @apply text-xs font-semibold uppercase text-brand-600;
+    @apply text-xs font-semibold uppercase;
     letter-spacing: 0.2em;
+    background: linear-gradient(90deg, #7c3aed, #6d28d9);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
   }
 
   .prose-school p {
@@ -127,6 +144,52 @@
   }
   .link-underline:hover::after {
     @apply w-full;
+  }
+
+  .gradient-header {
+    background: linear-gradient(180deg, #2e1065 0%, #4c1d95 55%, #5b21b6 100%);
+  }
+
+  .gradient-brand {
+    background: linear-gradient(135deg, #6d28d9 0%, #4c1d95 100%);
+  }
+
+  .gradient-brand-soft {
+    background: linear-gradient(135deg, #f5f3ff 0%, #ede9fe 100%);
+  }
+
+  .gradient-text {
+    background: linear-gradient(90deg, #6d28d9, #4c1d95);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .gradient-dark {
+    background: linear-gradient(160deg, #2e1065 0%, #3b0d73 40%, #4c1d95 100%);
+  }
+
+  .gradient-dark-deep {
+    background: linear-gradient(180deg, #2e1065 0%, #1e0a4e 100%);
+  }
+
+  .gradient-accent {
+    background: linear-gradient(135deg, #7c3aed 0%, #6d28d9 50%, #5b21b6 100%);
+  }
+
+  .gradient-accent-soft {
+    background: linear-gradient(135deg, rgba(124, 58, 237, 0.08) 0%, rgba(109, 40, 217, 0.04) 100%);
+  }
+
+  .gradient-border-top {
+    position: relative;
+  }
+  .gradient-border-top::before {
+    content: '';
+    position: absolute;
+    inset: 0 0 auto 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(167, 139, 250, 0.3), transparent);
   }
 }
 

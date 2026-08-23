@@ -46,8 +46,8 @@ function LoginScreen() {
   return (
     <div className="flex min-h-screen items-center justify-center bg-ink-50 px-5 py-12">
       <div className="w-full max-w-md">
-        <button onClick={() => window.location.hash = '/'} className="mx-auto flex items-center gap-3">
-          <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-brand-800 text-white"><ShieldCheck className="h-6 w-6" /></span>
+        <button onClick={() => { window.history.pushState(null, '', '/'); window.dispatchEvent(new PopStateEvent('popstate')); }} className="mx-auto flex items-center gap-3">
+          <span className="flex h-11 w-11 items-center justify-center rounded-xl gradient-accent text-white"><ShieldCheck className="h-6 w-6" /></span>
           <span className="text-left">
             <span className="block font-semibold text-ink-900">GMHSS Ramban</span>
           </span>
@@ -69,7 +69,7 @@ function LoginScreen() {
             </label>
             <button disabled={busy} className="btn-primary w-full">{busy ? 'Please wait…' : 'Sign In'}</button>
           </form>
-          <button onClick={() => window.location.hash = '/'} className="btn-ghost mt-2 w-full">Return to public website</button>
+          <button onClick={() => { window.history.pushState(null, '', '/'); window.dispatchEvent(new PopStateEvent('popstate')); }} className="btn-ghost mt-2 w-full">Return to public website</button>
         </div>
       </div>
     </div>
@@ -81,14 +81,10 @@ const NAV_ITEMS = [
   ['Notices', Bell],
   ['Activities', BookOpen],
   ['Gallery', FileImage],
-  ['Documents', FileText],
-  ['Results', Award],
-  ['Board Resources', FileText],
-  ['Useful Links', Link2],
-  ['Staff Directory', Users],
-  ['Infrastructure', Building2],
+  ['Documents & Links', FileText],
+  ['Exam Resources', Award],
   ['Admissions', GraduationCap],
-  ['Social Links', Share2],
+  ['School Profile', Users],
   ['Messages', Inbox],
   ['School Information', Settings],
 ] as const;
@@ -100,7 +96,7 @@ function AdminShell({ onNavigate }: { onNavigate: NavigateFn }) {
 
   return (
     <div className="min-h-screen bg-ink-50">
-      <aside className={`fixed inset-y-0 left-0 z-40 w-64 bg-brand-950 text-white transition-transform lg:translate-x-0 ${open ? 'translate-x-0' : '-translate-x-full'}`}>
+      <aside className={`fixed inset-y-0 left-0 z-40 w-64 gradient-dark-deep text-white transition-transform lg:translate-x-0 ${open ? 'translate-x-0' : '-translate-x-full'}`}>
         <div className="flex h-20 items-center justify-between border-b border-white/10 px-5">
           <div>
             <p className="font-semibold">GMHSS Ramban</p>
@@ -109,7 +105,7 @@ function AdminShell({ onNavigate }: { onNavigate: NavigateFn }) {
         </div>
         <nav className="space-y-1 p-3">
           {NAV_ITEMS.map(([label, Icon]) => (
-            <button key={label} onClick={() => { setTab(label); setOpen(false); }} className={`flex w-full items-center gap-3 rounded-xl px-3 py-3 text-left text-sm transition ${tab === label ? 'bg-white/15 text-white' : 'text-brand-200 hover:bg-white/10 hover:text-white'}`}>
+            <button key={label} onClick={() => { setTab(label); setOpen(false); }} className={`flex w-full items-center gap-3 rounded-xl px-3 py-3 text-left text-sm transition ${tab === label ? 'gradient-accent text-white shadow-soft' : 'text-brand-200 hover:bg-white/10 hover:text-white'}`}>
               <Icon className="h-4 w-4" />{label}
             </button>
           ))}
@@ -129,16 +125,12 @@ function AdminShell({ onNavigate }: { onNavigate: NavigateFn }) {
           {tab === 'Notices' && <NoticeManager />}
           {tab === 'Activities' && <ActivityManager />}
           {tab === 'Gallery' && <GalleryManager />}
-          {tab === 'Documents' && <DocumentManager />}
-          {tab === 'Results' && <ResultsManager />}
-          {tab === 'Board Resources' && <BoardResourceManager />}
-          {tab === 'Useful Links' && <UsefulLinksManager />}
-          {tab === 'Staff Directory' && <StaffDirectoryManager />}
-          {tab === 'Infrastructure' && <InfrastructureManager />}
+          {tab === 'Documents & Links' && <DocumentsLinksManager />}
+          {tab === 'Exam Resources' && <ExamResourcesManager />}
           {tab === 'Admissions' && <AdmissionsManager />}
-          {tab === 'Social Links' && <SocialLinksManager />}
+          {tab === 'School Profile' && <SchoolProfileManager />}
           {tab === 'Messages' && <MessagesManager />}
-          {tab === 'School Information' && <SettingsManager />}
+          {tab === 'School Information' && <SchoolInformationManager />}
         </main>
       </div>
       {open && <div className="fixed inset-0 z-30 bg-ink-950/30 lg:hidden" onClick={() => setOpen(false)} />}
@@ -183,12 +175,12 @@ function Dashboard({ onTab }: { onTab: (tab: string) => void }) {
     ['Draft Notices', counts.drafts, FileText, 'Notices'],
     ['Activities', counts.activities, BookOpen, 'Activities'],
     ['Gallery Photos', counts.gallery, FileImage, 'Gallery'],
-    ['Documents', counts.documents, FileText, 'Documents'],
+    ['Documents', counts.documents, FileText, 'Documents & Links'],
     ['Unread Messages', counts.messages, Inbox, 'Messages'],
-    ['Published Results', counts.results, Award, 'Results'],
-    ['Board Resources', counts.boardResources, FileText, 'Board Resources'],
-    ['Staff Members', counts.staff, Users, 'Staff Directory'],
-    ['Facilities', counts.infrastructure, Building2, 'Infrastructure'],
+    ['Published Results', counts.results, Award, 'Exam Resources'],
+    ['Board Resources', counts.boardResources, FileText, 'Exam Resources'],
+    ['Staff Members', counts.staff, Users, 'School Profile'],
+    ['Facilities', counts.infrastructure, Building2, 'School Profile'],
   ];
 
   return (
@@ -204,7 +196,7 @@ function Dashboard({ onTab }: { onTab: (tab: string) => void }) {
         {cards.map(([label, value, Icon, tab]) => (
           <button key={label} onClick={tab ? () => onTab(tab) : undefined} className={`card p-5 text-left transition ${tab ? 'card-hover cursor-pointer' : ''}`}>
             <div className="flex items-center justify-between">
-              <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-brand-50 text-brand-700"><Icon className="h-5 w-5" /></span>
+              <span className="flex h-10 w-10 items-center justify-center rounded-xl gradient-brand-soft text-brand-700 ring-1 ring-brand-100"><Icon className="h-5 w-5" /></span>
               <span className="text-3xl font-semibold text-ink-900">{value}</span>
             </div>
             <p className="mt-4 text-sm text-ink-500">{label}</p>
@@ -215,7 +207,7 @@ function Dashboard({ onTab }: { onTab: (tab: string) => void }) {
         <button onClick={() => onTab('Notices')} className="btn-primary"><Plus className="h-4 w-4" />Add Notice</button>
         <button onClick={() => onTab('Activities')} className="btn-secondary"><Plus className="h-4 w-4" />Add Activity</button>
         <button onClick={() => onTab('Gallery')} className="btn-secondary"><Plus className="h-4 w-4" />Upload Photo</button>
-        <button onClick={() => onTab('Documents')} className="btn-secondary"><Plus className="h-4 w-4" />Upload Document</button>
+        <button onClick={() => onTab('Documents & Links')} className="btn-secondary"><Plus className="h-4 w-4" />Upload Document</button>
       </div>
       <div className="mt-8 rounded-2xl border border-dashed border-ink-200 bg-white p-6">
         <p className="font-semibold text-ink-800">Publishing workflow</p>
@@ -780,6 +772,19 @@ function MessagesManager() {
 
 /* ============================ Settings ============================ */
 
+/* ============================ School Information ============================ */
+
+function SchoolInformationManager() {
+  const [sub, setSub] = useState('School Details');
+  return (
+    <div>
+      <SubTabs tabs={[['School Details', Settings], ['Social Links', Share2]]} active={sub} onSelect={setSub} />
+      {sub === 'School Details' && <SettingsManager />}
+      {sub === 'Social Links' && <SocialLinksManager />}
+    </div>
+  );
+}
+
 function SettingsManager() {
   const { notify } = useToast();
   const [settings, setSettings] = useState<SchoolSettings | null>(null);
@@ -1087,7 +1092,7 @@ function BoardResourceManager() {
             <div key={group.value} className="overflow-hidden rounded-2xl bg-white shadow-soft ring-1 ring-ink-100">
               <button onClick={() => setOpenType(openType === group.value ? null : group.value)} className="flex w-full items-center justify-between p-5 text-left">
                 <div className="flex items-center gap-3">
-                  <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-brand-50 text-brand-700"><FileText className="h-4 w-4" /></span>
+                  <span className="flex h-9 w-9 items-center justify-center rounded-lg gradient-brand-soft text-brand-700 ring-1 ring-brand-100"><FileText className="h-4 w-4" /></span>
                   <div>
                     <p className="font-semibold text-ink-800">{group.label}</p>
                     <p className="text-xs text-ink-400">{group.items.length} item{group.items.length !== 1 ? 's' : ''}</p>
@@ -1704,3 +1709,51 @@ function AdmissionsManager() {
     </div>
   );
 }
+
+/* ============================ Merged Managers ============================ */
+
+function SubTabs({ tabs, active, onSelect }: { tabs: [string, typeof Bell][]; active: string; onSelect: (t: string) => void }) {
+  return (
+    <div className="mb-6 flex flex-wrap gap-2">
+      {tabs.map(([label, Icon]) => (
+        <button key={label} onClick={() => onSelect(label)} className={`inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-semibold transition ${active === label ? 'gradient-accent text-white shadow-soft' : 'bg-white text-ink-600 ring-1 ring-ink-200 hover:bg-brand-50 hover:text-brand-800'}`}>
+          <Icon className="h-4 w-4" />{label}
+        </button>
+      ))}
+    </div>
+  );
+}
+
+function DocumentsLinksManager() {
+  const [sub, setSub] = useState('Documents');
+  return (
+    <div>
+      <SubTabs tabs={[['Documents', FileText], ['Useful Links', Link2]]} active={sub} onSelect={setSub} />
+      {sub === 'Documents' && <DocumentManager />}
+      {sub === 'Useful Links' && <UsefulLinksManager />}
+    </div>
+  );
+}
+
+function ExamResourcesManager() {
+  const [sub, setSub] = useState('Results');
+  return (
+    <div>
+      <SubTabs tabs={[['Results', Award], ['Board Resources', FileText]]} active={sub} onSelect={setSub} />
+      {sub === 'Results' && <ResultsManager />}
+      {sub === 'Board Resources' && <BoardResourceManager />}
+    </div>
+  );
+}
+
+function SchoolProfileManager() {
+  const [sub, setSub] = useState('Staff Directory');
+  return (
+    <div>
+      <SubTabs tabs={[['Staff Directory', Users], ['Infrastructure', Building2]]} active={sub} onSelect={setSub} />
+      {sub === 'Staff Directory' && <StaffDirectoryManager />}
+      {sub === 'Infrastructure' && <InfrastructureManager />}
+    </div>
+  );
+}
+

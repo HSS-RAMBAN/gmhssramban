@@ -6,10 +6,10 @@ import { ActivityCard } from '@/components/ActivityCard';
 import { EmptyState, ErrorState, LoadingSkeleton } from '@/components/States';
 import { Reveal } from '@/components/Reveal';
 import type { NavigateFn } from '@/lib/types';
-
-const HERO_IMAGE = '/images/hero/747790180_1695912488193881_6220268956494401084_n.jpg';
+import { useHeroImage } from '@/lib/useHeroImage';
 
 export function ActivitiesPage({ onNavigate }: { onNavigate: NavigateFn }) {
+  const { heroImage } = useHeroImage();
   const q = useAsync(() => getPublishedActivities(), []);
   const [term, setTerm] = useState('');
   const [cat, setCat] = useState('All');
@@ -23,7 +23,7 @@ export function ActivitiesPage({ onNavigate }: { onNavigate: NavigateFn }) {
       {/* Hero */}
       <section className="relative min-h-[50vh] overflow-hidden">
         <div className="absolute inset-0">
-          <img src={HERO_IMAGE} alt="" className="h-full w-full object-cover" />
+          <img src={heroImage} alt="" className="h-full w-full object-cover" />
           <div className="absolute inset-0 hero-overlay-soft" />
         </div>
         <div className="relative flex min-h-[50vh] items-end pb-14 pt-[var(--header-height)]">

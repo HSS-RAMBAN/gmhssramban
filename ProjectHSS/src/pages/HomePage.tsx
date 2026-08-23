@@ -1,30 +1,36 @@
 import { ArrowRight, MapPin, Megaphone, CalendarDays, ChevronRight, Images, ExternalLink, GraduationCap } from 'lucide-react';
 import type { NavigateFn } from '@/lib/types';
-import { getSchoolSettings, getPublishedNotices, getPublishedActivities, getPublishedGallery, getPublishedHeroSlides, resolveImagePath } from '@/lib/queries';
+import { getSchoolSettings, getPublishedNotices, getPublishedActivities, getPublishedGallery, resolveImagePath } from '@/lib/queries';
 import { useAsync } from '@/lib/useAsync';
 import { Reveal } from '@/components/Reveal';
 import { SectionHeader } from '@/components/SectionHeader';
 import { NoticeCard } from '@/components/NoticeCard';
 import { ActivityCard } from '@/components/ActivityCard';
-import { HeroSlideshow } from '@/components/HeroSlideshow';
+import { HomeCarousel } from '@/components/HomeCarousel';
 import { EmptyState, ErrorState, LoadingSkeleton } from '@/components/States';
-
-const HERO_IMAGE = '/images/hero/747790180_1695912488193881_6220268956494401084_n.jpg';
+import { useHeroImage } from '@/lib/useHeroImage';
 
 export function HomePage({ onNavigate }: { onNavigate: NavigateFn }) {
   const settings = useAsync(getSchoolSettings, []);
   const notices = useAsync(() => getPublishedNotices(3), []);
   const activities = useAsync(() => getPublishedActivities(4), []);
   const gallery = useAsync(() => getPublishedGallery(6), []);
-  const slides = useAsync(getPublishedHeroSlides, []);
+  const { heroImage, heroEnabled } = useHeroImage();
 
   const s = settings.data;
 
   return (
     <div>
-      {/* 01 — Hero with slideshow */}
+      {/* 01 — Hero */}
       <section className="relative min-h-[92vh] overflow-hidden">
-        <HeroSlideshow slides={slides.data ?? []} fallback={HERO_IMAGE} heroEnabled={s?.hero_enabled ?? true} />
+        {heroEnabled ? (
+          <div className="absolute inset-0">
+            <img src={heroImage} alt="" className="h-full w-full object-cover" />
+            <div className="absolute inset-0 hero-overlay" />
+          </div>
+        ) : (
+          <div className="absolute inset-0 bg-brand-950" />
+        )}
         <div className="relative flex min-h-[92vh] items-center">
           <div className="container-page w-full pt-24 pb-20">
             <Reveal>
@@ -39,7 +45,7 @@ export function HomePage({ onNavigate }: { onNavigate: NavigateFn }) {
                 {s?.hero_subtitle || 'Education • Character • Opportunity'}
               </p>
               <div className="mt-9 flex flex-wrap gap-3">
-                <button onClick={() => onNavigate('/about')} className="btn bg-white text-brand-800 shadow-card hover:bg-brand-50 active:scale-[0.98]">
+                <button onClick={() => onNavigate('/about')} className="btn gradient-accent text-white shadow-card hover:shadow-glow active:scale-[0.98]">
                   Explore the School
                   <ArrowRight className="h-4 w-4" />
                 </button>
@@ -102,7 +108,7 @@ export function HomePage({ onNavigate }: { onNavigate: NavigateFn }) {
       <section className="py-14 sm:py-16">
         <div className="container-page">
           <Reveal>
-            <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-brand-900 via-brand-800 to-brand-950 px-8 py-10 sm:px-12 sm:py-12">
+            <div className="relative overflow-hidden rounded-3xl gradient-dark px-8 py-10 sm:px-12 sm:py-12">
               <div className="absolute inset-0 topo-texture opacity-20" />
               <div className="relative flex flex-col items-center text-center sm:flex-row sm:justify-between sm:text-left">
                 <div>
@@ -112,7 +118,7 @@ export function HomePage({ onNavigate }: { onNavigate: NavigateFn }) {
                   <h2 className="mt-5 text-2xl font-semibold text-white sm:text-3xl">Academics at GMHSS Ramban</h2>
                   <p className="mt-3 max-w-xl text-brand-200">Secondary and higher secondary education with Science and Arts streams for Classes 11–12.</p>
                 </div>
-                <button onClick={() => onNavigate('/academics')} className="btn mt-6 bg-white text-brand-800 shadow-card hover:bg-brand-50 active:scale-[0.98] sm:mt-0">
+                <button onClick={() => onNavigate('/academics')} className="btn mt-6 gradient-accent text-white shadow-card hover:shadow-glow active:scale-[0.98] sm:mt-0">
                   View Academics
                   <ArrowRight className="h-4 w-4" />
                 </button>
@@ -146,7 +152,30 @@ export function HomePage({ onNavigate }: { onNavigate: NavigateFn }) {
         </div>
       </section>
 
-      {/* 06 — Gallery preview */}
+      {/* 06 — Photo carousel */}
+      <section className="bg-white py-16 sm:py-20">
+        <div className="container-page">
+          <SectionHeader
+            eyebrow="Campus life"
+            title="A glimpse of our school"
+            description="Moments from classrooms, events, and everyday life at GMHSS Ramban."
+            action={<button onClick={() => onNavigate('/gallery')} className="btn-ghost">View full gallery <ChevronRight className="h-4 w-4" /></button>}
+          />
+          <div className="mt-10">
+            {gallery.loading ? (
+              <LoadingSkeleton className="h-[320px] rounded-2xl" />
+            ) : gallery.error ? (
+              <ErrorState message="We couldn't load photos right now." onRetry={gallery.reload} />
+            ) : gallery.data && gallery.data.length > 0 ? (
+              <HomeCarousel images={gallery.data} onOpen={() => onNavigate('/gallery')} />
+            ) : (
+              <EmptyState icon={<Images className="h-6 w-6" />} title="No photos yet" description="Photos will appear here once published." />
+            )}
+          </div>
+        </div>
+      </section>
+
+      {/* 07 — Gallery grid preview */}
       <section className="py-16 sm:py-20">
         <div className="container-page">
           <SectionHeader

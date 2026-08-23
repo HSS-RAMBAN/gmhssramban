@@ -12,7 +12,6 @@ import type {
   StaffMember,
   InfrastructureItem,
   SchoolQuote,
-  HeroSlide,
   SocialLink,
   AdmissionsContent,
 } from './types';
@@ -202,17 +201,6 @@ export async function getPublishedQuotes(): Promise<SchoolQuote[]> {
     .order('created_at', { ascending: false });
   if (error) throw error;
   return (data ?? []) as SchoolQuote[];
-}
-
-export async function getPublishedHeroSlides(): Promise<HeroSlide[]> {
-  const { data, error } = await supabase
-    .from('hero_slides')
-    .select('*')
-    .eq('is_active', true)
-    .order('sort_order', { ascending: true })
-    .order('created_at', { ascending: false });
-  if (error) throw error;
-  return (data ?? []) as HeroSlide[];
 }
 
 export async function getPublishedSocialLinks(): Promise<SocialLink[]> {

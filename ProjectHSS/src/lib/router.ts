@@ -5,28 +5,47 @@ export interface RouteState {
   query: URLSearchParams;
 }
 
-function parseHash(): RouteState {
-  const hash = window.location.hash.replace(/^#/, '') || '/';
-  const [path, queryString] = hash.split('?');
+function parseLocation(): RouteState {
+  const path = window.location.pathname || '/';
+  const queryString = window.location.search.replace(/^\?/, '');
   return {
     path: path || '/',
     query: new URLSearchParams(queryString || ''),
   };
 }
 
+function cleanTrackingParams(query: URLSearchParams): URLSearchParams {
+  const trackingKeys = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content'];
+  const cleaned = new URLSearchParams(query);
+  for (const key of trackingKeys) cleaned.delete(key);
+  return cleaned;
+}
+
 export function useRouter() {
-  const [route, setRoute] = useState<RouteState>(() => parseHash());
+  const [route, setRoute] = useState<RouteState>(() => {
+    const initial = parseLocation();
+    const cleanedQuery = cleanTrackingParams(initial.query);
+    if (cleanedQuery.toString() !== initial.query.toString()) {
+      const cleanUrl = initial.path + (cleanedQuery.toString() ? '?' + cleanedQuery.toString() : '');
+      window.history.replaceState(null, '', cleanUrl);
+      return { path: initial.path, query: cleanedQuery };
+    }
+    return initial;
+  });
 
   useEffect(() => {
     const onChange = () => {
-      setRoute(parseHash());
+      const loc = parseLocation();
+      const cleaned = cleanTrackingParams(loc.query);
+      if (cleaned.toString() !== loc.query.toString()) {
+        const cleanUrl = loc.path + (cleaned.toString() ? '?' + cleaned.toString() : '');
+        window.history.replaceState(null, '', cleanUrl);
+      }
+      setRoute({ path: loc.path, query: cleaned });
       window.scrollTo({ top: 0, behavior: 'instant' as ScrollBehavior });
     };
-    window.addEventListener('hashchange', onChange);
-    if (!window.location.hash) {
-      window.location.hash = '/';
-    }
-    return () => window.removeEventListener('hashchange', onChange);
+    window.addEventListener('popstate', onChange);
+    return () => window.removeEventListener('popstate', onChange);
   }, []);
 
   const navigate = useCallback((to: string) => {
@@ -35,7 +54,9 @@ export function useRouter() {
       window.scrollTo({ top: 0, behavior: 'smooth' });
       return;
     }
-    window.location.hash = to;
+    window.history.pushState(null, '', to);
+    setRoute({ path: to, query: new URLSearchParams() });
+    window.scrollTo({ top: 0, behavior: 'instant' as ScrollBehavior });
   }, [route.path]);
 
   return { route, navigate };

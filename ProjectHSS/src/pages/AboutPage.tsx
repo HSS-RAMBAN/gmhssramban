@@ -5,11 +5,11 @@ import { Reveal } from '@/components/Reveal';
 import { SectionHeader } from '@/components/SectionHeader';
 import { PublicStaffDirectory, PublicInfrastructure } from '@/components/PublicSections';
 import type { NavigateFn } from '@/lib/types';
-
-const HERO_IMAGE = '/images/hero/747790180_1695912488193881_6220268956494401084_n.jpg';
+import { useHeroImage } from '@/lib/useHeroImage';
 
 export function AboutPage({ onNavigate }: { onNavigate: NavigateFn }) {
   const settings = useAsync(getSchoolSettings, []);
+  const { heroImage } = useHeroImage();
   const s = settings.data;
 
   return (
@@ -17,7 +17,7 @@ export function AboutPage({ onNavigate }: { onNavigate: NavigateFn }) {
       {/* Hero */}
       <section className="relative min-h-[50vh] overflow-hidden">
         <div className="absolute inset-0">
-          <img src={HERO_IMAGE} alt="" className="h-full w-full object-cover" />
+          <img src={heroImage} alt="" className="h-full w-full object-cover" />
           <div className="absolute inset-0 hero-overlay-soft" />
         </div>
         <div className="relative flex min-h-[50vh] items-end pb-14 pt-[var(--header-height)]">
@@ -48,7 +48,7 @@ export function AboutPage({ onNavigate }: { onNavigate: NavigateFn }) {
           </Reveal>
           <Reveal className="lg:col-span-5" delay={120}>
             <div className="relative aspect-[4/3] overflow-hidden rounded-2xl shadow-card">
-              <img src={HERO_IMAGE} alt="Govt. Model Higher Secondary School, Ramban" className="h-full w-full object-cover" loading="lazy" />
+              <img src={heroImage} alt="Govt. Model Higher Secondary School, Ramban" className="h-full w-full object-cover" loading="lazy" />
               <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-brand-950/70 to-transparent p-5">
                 <p className="text-sm font-medium text-white">Ramban, Jammu & Kashmir</p>
               </div>
@@ -112,7 +112,7 @@ export function AboutPage({ onNavigate }: { onNavigate: NavigateFn }) {
         <div className="container-page grid gap-12 lg:grid-cols-12 lg:items-center">
           <Reveal className="lg:col-span-5">
             <div className="relative mx-auto aspect-[4/5] max-w-sm overflow-hidden rounded-2xl shadow-card">
-              <img src={HERO_IMAGE} alt={s?.principal_name || 'Principal'} className="h-full w-full object-cover" loading="lazy" />
+              <img src={heroImage} alt={s?.principal_name || 'Principal'} className="h-full w-full object-cover" loading="lazy" />
               <div className="absolute inset-0 bg-gradient-to-t from-brand-950/40 to-transparent" />
             </div>
           </Reveal>
@@ -203,23 +203,23 @@ export function AboutPage({ onNavigate }: { onNavigate: NavigateFn }) {
       </section>
 
       {/* Location & CTA */}
-      <section className="bg-brand-950 py-20 text-white sm:py-28">
+      <section className="bg-white py-20 text-ink-900 sm:py-28">
         <div className="container-page grid gap-8 md:grid-cols-2 md:items-center">
           <Reveal>
-            <p className="section-eyebrow text-brand-300">Location</p>
-            <h2 className="mt-4 text-3xl font-semibold text-white sm:text-4xl">Find the school in Ramban</h2>
-            <p className="mt-4 text-brand-100">{s?.address || 'Exact address to be confirmed by the school.'}</p>
+            <p className="section-eyebrow">Location</p>
+            <h2 className="mt-4 text-3xl font-semibold text-ink-900 sm:text-4xl">Find the school in Ramban</h2>
+            <p className="mt-4 text-ink-500">{s?.address || 'Exact address to be confirmed by the school.'}</p>
           </Reveal>
           <Reveal delay={120}>
-            <div className="rounded-2xl bg-white/5 p-6 ring-1 ring-inset ring-white/10">
-              <MapPin className="h-8 w-8 text-brand-300" />
-              <p className="mt-4 text-sm text-brand-100">Map location and directions will appear here once the school confirms the official location.</p>
+            <div className="card p-6">
+              <MapPin className="h-8 w-8 text-brand-600" />
+              <p className="mt-4 text-sm text-ink-500">Map location and directions will appear here once the school confirms the official location.</p>
               {s?.map_url ? (
-                <a href={s.map_url} target="_blank" rel="noreferrer" className="btn mt-5 bg-white text-brand-800 hover:bg-brand-50">
+                <a href={s.map_url} target="_blank" rel="noreferrer" className="btn-primary mt-5">
                   <ExternalLink className="h-4 w-4" /> Open in Google Maps
                 </a>
               ) : (
-                <button onClick={() => onNavigate('/contact')} className="btn mt-5 bg-white text-brand-800 hover:bg-brand-50">
+                <button onClick={() => onNavigate('/contact')} className="btn-secondary mt-5">
                   Contact & location <ChevronRight className="h-4 w-4" />
                 </button>
               )}
