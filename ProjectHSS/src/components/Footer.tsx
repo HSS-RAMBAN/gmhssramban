@@ -46,44 +46,44 @@ export function Footer() {
           )}
         </div>
 
-        ```jsx
-{/* Developer credit — prominent but professional */}
-<div className="mt-14 flex flex-col items-center text-center">
-  <p className="text-[15px] leading-relaxed text-brand-400">
-    Website designed &amp; developed with{' '}
-    <span className="text-red-400">&hearts;</span>
-    <br />
-    by a proud alumnus
-  </p>
+        {/* Developer credit — prominent but professional */}
+        <div className="mt-14 flex flex-col items-center text-center">
+          <p className="text-[15px] leading-relaxed text-brand-400">
+            Website designed &amp; developed with{' '}
+            <span className="text-red-400">&hearts;</span>
+            <br />
+            by a proud alumnus
+          </p>
 
-  <p className="mt-2 text-[30px] font-bold tracking-wide text-brand-200">
-    TheRoxYogi
-  </p>
+          <p className="mt-2 text-[30px] font-bold tracking-wide text-brand-200">
+            TheRoxYogi
+          </p>
 
-  <p className="mt-1 text-[16px] font-medium text-brand-300">
-    Batch 2023
-  </p>
+          <p className="mt-1 text-[16px] font-medium text-brand-300">
+            Batch 2023
+          </p>
 
-  <a
-    href="mailto:hiamit.in@gmail.com"
-    className="mt-2 text-[15px] text-brand-400 transition-colors duration-200 hover:text-brand-200"
-  >
-    hiamit.in@gmail.com
-  </a>
+          <a
+            href="mailto:hiamit.in@gmail.com"
+            className="mt-2 text-[15px] text-brand-400 transition-colors duration-200 hover:text-brand-200"
+          >
+            hiamit.in@gmail.com
+          </a>
 
-  {/* Generous empty space after email */}
-  <div className="h-60" />
-</div>
+          {/* Generous empty space after email */}
+          <div className="h-60" />
+        </div>
         
-      {showBackTop && (
-        <button
-          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-          className="fixed bottom-6 right-6 z-40 flex h-11 w-11 items-center justify-center rounded-full gradient-accent text-white shadow-lift transition-all duration-300 hover:shadow-glow active:scale-95"
-          aria-label="Back to top"
-        >
-          <ArrowUp className="h-5 w-5" />
-        </button>
-      )}
+        {showBackTop && (
+          <button
+            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+            className="fixed bottom-6 right-6 z-40 flex h-11 w-11 items-center justify-center rounded-full gradient-accent text-white shadow-lift transition-all duration-300 hover:shadow-glow active:scale-95"
+            aria-label="Back to top"
+          >
+            <ArrowUp className="h-5 w-5" />
+          </button>
+        )}
+      </div>
     </footer>
   );
 }
