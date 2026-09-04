@@ -68,6 +68,7 @@ export function Footer() {
         </div>
 
         <br />
+
         <div className="h-6" />
 
         <div className="mx-auto max-w-xs border-t border-white/20 pt-4 text-center">
