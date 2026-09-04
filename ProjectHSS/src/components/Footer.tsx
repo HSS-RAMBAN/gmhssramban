@@ -48,7 +48,7 @@ export function Footer() {
 
         {/* Developer credit — sits around lower-middle of final viewport */}
         <div className="mt-14 flex flex-col items-center text-center">
-          <p className="text-[11px] leading-relaxed text-brand-400">
+          <p className="text-[25px] leading-relaxed text-brand-400">
             Website designed &amp; developed with{' '}
             <span className="text-red-400">&hearts;</span>
             <br />
@@ -58,7 +58,7 @@ export function Footer() {
           </p>
           <a
             href="mailto:hiamit.in@gmail.com"
-            className="mt-1.5 text-[11px] text-brand-400 transition-colors duration-200 hover:text-brand-200"
+            className="mt-1.5 text-[15px] text-brand-400 transition-colors duration-200 hover:text-brand-200"
           >
             hiamit.in@gmail.com
           </a>
