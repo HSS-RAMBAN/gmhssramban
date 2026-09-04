@@ -10,19 +10,25 @@ useEffect(() => {
 let mounted = true;
 
 ```
-(async () => {
+const loadVisits = async () => {
   try {
     const count = await incrementVisit();
-    if (mounted) setVisitCount(count);
+    if (mounted) {
+      setVisitCount(count);
+    }
   } catch {
     try {
       const count = await getVisitCount();
-      if (mounted) setVisitCount(count);
+      if (mounted) {
+        setVisitCount(count);
+      }
     } catch {
-      /* ignore */
+      // Ignore visit counter errors
     }
   }
-})();
+};
+
+loadVisits();
 
 return () => {
   mounted = false;
@@ -32,12 +38,16 @@ return () => {
 }, []);
 
 useEffect(() => {
-const onScroll = () => setShowBackTop(window.scrollY > 600);
+const onScroll = () => {
+setShowBackTop(window.scrollY > 600);
+};
 
 ```
 window.addEventListener('scroll', onScroll, { passive: true });
 
-return () => window.removeEventListener('scroll', onScroll);
+return () => {
+  window.removeEventListener('scroll', onScroll);
+};
 ```
 
 }, []);
@@ -64,7 +74,6 @@ return ( <footer className="relative overflow-hidden gradient-dark-deep text-bra
 
     <div className="h-6" />
 
-    {/* Developer credit — prominent but professional */}
     <div className="mx-auto max-w-xs border-t border-white/20 pt-4 text-center">
       <p className="text-[11px] font-medium uppercase tracking-[0.2em] text-white/60">
         Website designed &amp; developed with{' '}
@@ -85,13 +94,17 @@ return ( <footer className="relative overflow-hidden gradient-dark-deep text-bra
         hiamit.in@gmail.com
       </a>
 
-      {/* Generous empty space after email */}
       <div className="h-60" />
     </div>
 
     {showBackTop && (
       <button
-        onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+        onClick={() => {
+          window.scrollTo({
+            top: 0,
+            behavior: 'smooth',
+          });
+        }}
         className="fixed bottom-6 right-6 z-40 flex h-11 w-11 items-center justify-center rounded-full gradient-accent text-white shadow-lift transition-all duration-300 hover:shadow-glow active:scale-95"
         aria-label="Back to top"
       >
