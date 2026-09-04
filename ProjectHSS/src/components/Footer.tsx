@@ -46,6 +46,9 @@ export function Footer() {
           )}
         </div>
 
+        {/* One line of space before developer credit */}
+        <div className="h-6" />
+
         {/* Developer credit — prominent but professional */}
           <div className="mx-auto max-w-xs border-t border-white/20 pt-4 text-center">
           <p className="text-[11px] font-medium uppercase tracking-[0.2em] text-white/60">
@@ -81,4 +84,7 @@ export function Footer() {
       </div>
     </footer>
   );
+}
+         
+        
 }
