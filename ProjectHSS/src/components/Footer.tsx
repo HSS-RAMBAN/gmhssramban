@@ -66,10 +66,8 @@ return ( <footer className="relative overflow-hidden gradient-dark-deep text-bra
         </p>
       )}
     </div>
-
+    
     <br />
-    <br />
-
     <div className="h-6" />
 
     <div className="mx-auto max-w-xs border-t border-white/20 pt-4 text-center">
@@ -81,7 +79,6 @@ return ( <footer className="relative overflow-hidden gradient-dark-deep text-bra
       </p>
 
       <p className="mt-0 text-lg font-bold tracking-tight text-white">
-        <br />
         TheRoxYogi
       </p>
 
