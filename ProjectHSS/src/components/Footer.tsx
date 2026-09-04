@@ -45,8 +45,8 @@ export function Footer() {
             </p>
           )}
         </div>
-
-        {/* One line of space before developer credit */}
+<br />
+<br />
         <div className="h-6" />
 
         {/* Developer credit — prominent but professional */}
@@ -57,7 +57,7 @@ export function Footer() {
     <br />
             by a proud alumnus,
           </p>
-          <p className="mt-2 text-lg font-bold tracking-tight text-white">
+          <p className="mt-0 text-lg font-bold tracking-tight text-white">
        <br />
             TheRoxYogi</p>
 
