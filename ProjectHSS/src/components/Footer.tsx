@@ -54,7 +54,9 @@ export function Footer() {
     <br />
             by a proud alumnus,
           </p>
-          <p className="mt-2 text-lg font-bold tracking-tight text-white">TheRoxYogi</p>
+          <p className="mt-2 text-lg font-bold tracking-tight text-white">
+       <br />
+            TheRoxYogi</p>
 
           <a
             href="mailto:hiamit.in@gmail.com"
