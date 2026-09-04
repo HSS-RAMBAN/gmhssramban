@@ -47,32 +47,28 @@ export function Footer() {
         </div>
 
         {/* Developer credit — prominent but professional */}
-        <div className="mt-14 flex flex-col items-center text-center">
-          <p className="text-[15px] leading-relaxed text-brand-400">
-            Website designed &amp; developed with{' '}
-            <span className="text-red-400">&hearts;</span>
-            <br />
-            by a proud alumnus
-          </p>
+<div className="mt-14 flex flex-col items-center text-center">
+  <p className="text-[15px] leading-relaxed text-brand-400">
+    Website designed &amp; developed with{' '}
+    <span className="text-red-400">&hearts;</span>
+    <br />
+    by a proud alumnus,
+  </p>
 
-          <p className="mt-2 text-[30px] font-bold tracking-wide text-brand-200">
-            TheRoxYogi
-          </p>
+  <p className="mt-2 text-[30px] font-bold tracking-wide text-brand-200">
+    TheRoxYogi <span className="text-[18px] font-medium text-brand-300">(Batch 2023)</span>
+  </p>
 
-          <p className="mt-1 text-[16px] font-medium text-brand-300">
-            Batch 2023
-          </p>
+  <a
+    href="mailto:hiamit.in@gmail.com"
+    className="mt-5 text-[15px] text-brand-400 transition-colors duration-200 hover:text-brand-200"
+  >
+    hiamit.in@gmail.com
+  </a>
 
-          <a
-            href="mailto:hiamit.in@gmail.com"
-            className="mt-2 text-[15px] text-brand-400 transition-colors duration-200 hover:text-brand-200"
-          >
-            hiamit.in@gmail.com
-          </a>
-
-          {/* Generous empty space after email */}
-          <div className="h-60" />
-        </div>
+  {/* Generous empty space after email */}
+  <div className="h-60" />
+</div>
         
         {showBackTop && (
           <button
