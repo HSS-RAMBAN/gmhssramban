@@ -79,7 +79,7 @@ export function Footer() {
           </p>
 
           <p className="mt-0 text-lg font-bold tracking-tight text-white">
-            TheRoxYogi{'  '}
+            TheRoxYogi{'   '}
             <span className="text-[11px] font-medium tracking-[0.2em] text-white/60">
               (Batch 2023)
             </span>
