@@ -47,23 +47,20 @@ export function Footer() {
         </div>
 
         {/* Developer credit — prominent but professional */}
-<div className="mt-14 flex flex-col items-center text-center">
-  <p className="text-[15px] leading-relaxed text-brand-400">
-    Website designed &amp; developed with{' '}
-    <span className="text-red-400">&hearts;</span>
+          <div className="mx-auto max-w-xs border-t border-white/20 pt-4">
+          <p className="text-[11px] font-medium uppercase tracking-[0.2em] text-white/60">
+           Website designed &amp; developed with{' '}
+            <span className="text-red-400">&hearts;</span>
     <br />
-    by a proud alumnus,
-  </p>
+            by a proud alumnus,
+          </p>
+          <p className="mt-2 text-lg font-bold tracking-tight text-white">TheRoxYogi</p>
 
-  <p className="mt-2 text-[30px] font-bold tracking-wide text-brand-200">
-    TheRoxYogi <span className="text-[18px] font-medium text-brand-300">(Batch 2023)</span>
-  </p>
-
-  <a
-    href="mailto:hiamit.in@gmail.com"
-    className="mt-5 text-[15px] text-brand-400 transition-colors duration-200 hover:text-brand-200"
-  >
-    hiamit.in@gmail.com
+          <a
+            href="mailto:hiamit.in@gmail.com"
+            className="mt-1 inline-block text-sm font-medium text-sky-400 transition hover:text-sky-300"
+          >
+            hiamit.in@gmail.com
   </a>
 
   {/* Generous empty space after email */}
