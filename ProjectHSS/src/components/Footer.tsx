@@ -79,7 +79,7 @@ return ( <footer className="relative overflow-hidden gradient-dark-deep text-bra
       </p>
 
       <p className="mt-0 text-lg font-bold tracking-tight text-white">
-        TheRoxYogi
+        TheRoxYogi <className="text-[11px] font-medium tracking-[0.2em] text-white/60">(Batch 2023)</>
       </p>
 
       <a
