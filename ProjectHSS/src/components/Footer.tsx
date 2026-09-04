@@ -35,7 +35,7 @@ export function Footer() {
       <div className="container-page relative py-16 sm:py-20">
         <div className="flex flex-col items-center text-center">
           <p className="text-xs text-brand-400">
-            &copy; {new Date().getFullYear()} GMHSS Ramban. All rights reserved.
+            &copy; {new Date().getFullYear()} GMHSS RAMBAN. All rights reserved.
           </p>
 
           {visitCount !== null && (
