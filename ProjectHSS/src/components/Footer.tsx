@@ -1,4 +1,3 @@
-```tsx
 import { useEffect, useState } from 'react';
 import { ArrowUp, Eye } from 'lucide-react';
 import { getVisitCount, incrementVisit } from '@/lib/queries';
@@ -114,4 +113,3 @@ export function Footer() {
     </footer>
   );
 }
-```
