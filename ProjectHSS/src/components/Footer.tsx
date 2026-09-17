@@ -90,7 +90,7 @@ export function Footer() {
             className="mt-1 inline-block text-sm font-medium text-sky-400 transition hover:text-sky-300"
           >
             hiamit.in@gmail.com
-          </a>
+         <br /><br /><br /> </a>
 
           <div className="h-60" />
         </div>
